@@ -10,9 +10,9 @@ h1, p{
     align-items: center;
 }
 
-#script {
+#script-container {
     display: flex;
-    padding: 10px;
+    flex-direction: row;
 }
 
 button {

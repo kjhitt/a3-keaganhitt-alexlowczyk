@@ -29,7 +29,8 @@ function drawHouse(percentage) {
 
     const svg = d3.create("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .attr("class", "chart");
 
     //function to draw an arc of seats at a specific radius
     function drawArc(seats, demSeatsArc, radius) {
@@ -49,7 +50,6 @@ function drawHouse(percentage) {
     for (let i = 0; i < demSeatDistribution.length; i++) {
         var radius = minRadius + (maxRadius - minRadius) * i/(demSeatDistribution.length - 1);
         drawArc(seatDistribution[i], demSeatDistribution[i], radius);
-        console.log(radius);
     }
 
     svg.append('rect')
@@ -61,5 +61,5 @@ function drawHouse(percentage) {
         .attr('fill', 'none');
 
     // Append the SVG element.
-    container.append(svg.node());
+    scriptcontainer.append(svg.node());
 }
