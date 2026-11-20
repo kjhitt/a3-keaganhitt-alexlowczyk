@@ -1,5 +1,7 @@
 import drawNeedles from './charts/needle.js';
 import drawHouses from './charts/houseOfRepresentatives.js';
+import drawBarbell from './charts/barbell.js';
+import drawMap from './charts/map.js';
 
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
@@ -17,7 +19,13 @@ function drawVisualization() {
         drawNeedles(Math.random() * 100, Math.random() * 100);
     }
     else if (currentVis === 2) {
-        drawHou
+        drawHouses(Math.random() * 100, Math.random() * 100);
+    }
+    else if (currentVis === 3) {
+        drawBarbell();
+    }
+    else if (currentVis === 4) {
+        drawMap();
     }
 }
 

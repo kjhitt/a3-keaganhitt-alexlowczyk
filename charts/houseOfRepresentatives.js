@@ -29,7 +29,8 @@ function drawHouse(percentage) {
 
     const svg = d3.create("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .attr("class", "chart");
 
     //function to draw an arc of seats at a specific radius
     function drawArc(seats, demSeatsArc, radius) {
