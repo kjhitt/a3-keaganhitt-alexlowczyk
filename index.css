@@ -1,4 +1,4 @@
-h1, p{
+h1, p, label {
     text-align: center;
     font-family: Arial;
     max-width: 75ch;
@@ -10,12 +10,18 @@ h1, p{
     align-items: center;
 }
 
-#script {
+#script-container, .visibleSlider {
     display: flex;
-    padding: 10px;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
 }
 
 button {
     font-size: 20px;
     width: 110px;
+}
+
+#percentLabel {
+    min-width: 5ch;
 }

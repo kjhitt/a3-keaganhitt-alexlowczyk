@@ -128,5 +128,5 @@ function drawNeedle(percentage) {
         .attr("fill", "dark-gray");
 
     // Append the SVG element.
-    container.append(svg.node());
+    scriptcontainer.append(svg.node());
 }
