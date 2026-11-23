@@ -46,11 +46,15 @@ function drawVisualization() {
 
 //function for when the button is clicked, moves on to the next step
 async function onClick() {
+    let current_trial = Math.sumPrecise(pictureCount);
+    let recorded_type = currentVis;
+  
     //unhide/hide different things on first click
     if (firstClick) {
         document.getElementById("slider").classList.add("visibleSlider");
         document.getElementById("question").hidden = false;
         document.getElementById("nameInput").hidden = true;
+        button.textContent = "Submit";
         firstClick = false;
     }
     //iterate pictures unless all 20 have been viewed, in which case move on
@@ -92,24 +96,22 @@ async function onClick() {
 
     const {percent1, percent2} = drawVisualization();
     if (button.textContent === "Submit") {
-        const res = await fetch("/submit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: document.getElementById("nameInput").value,
-                visualization_type: currentVis,
-                trial_number: pictureCount,
-                actual_percent_diff: current_percent_diff?current_percent_diff: Math.abs(percent1 - percent2),
-                reported_percent_diff: slider.value
+      const res = await fetch("/submit", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              name: document.getElementById("nameInput").value,
+              visualization_type: recorded_type,
+              trial_number: current_trial,
+              actual_percent_diff: current_percent_diff?current_percent_diff: percent1 < percent2 ? Math.round(((percent1/percent2) * 100)/5) * 5 : Math.round(((percent2/percent1) * 100)/5) * 5,
+              reported_percent_diff: slider.value
 
-            })
-        });
+          })
+      });
     }
-
-    current_percent_diff = Math.abs(percent1 - percent2);
-    button.textContent = "Submit";
+    current_percent_diff = percent1 < percent2 ? Math.round(((percent1/percent2) * 100)/5) * 5 : Math.round(((percent2/percent1) * 100)/5) * 5;
     slider.value = 50; //resets the slider
     sliderText.value = 50;
 }

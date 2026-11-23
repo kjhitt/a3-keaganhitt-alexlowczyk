@@ -24,8 +24,8 @@ function buildMap(mapData, stateData, percentOne, percentTwo){
     const height = 300;
 
     const svg = d3.create("svg").attr("width", width).attr("height", height).attr("viewBox", [0, 0, 1500, 450]).attr("class", "chart");
-    const random_blue_one = Math.round((percentOne * .01) * 51);
-    const random_blue_two = Math.round((percentTwo * 0.01) * 51);
+    const random_blue_one = Math.round((percentOne * 0.01) * 50);
+    const random_blue_two = Math.round((percentTwo * 0.01) * 50);
     const votes_one = d3.shuffle(Array(random_blue_one).fill(1).concat(Array(50-random_blue_one).fill(0)));
     const votes_two = d3.shuffle(Array(random_blue_two).fill(1).concat(Array(50-random_blue_two).fill(0)));
     console.log('die');
