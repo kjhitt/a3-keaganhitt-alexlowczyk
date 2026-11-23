@@ -45,9 +45,10 @@ function drawVisualization() {
 async function onClick() {
     //TODO: submit values to the server here
     document.getElementById("nameInput").hidden = true;
-    //iterate pictures unless all 20 have been viewed, in which case move on
-    
-    pictureCount++;
+    //iterate pictures unless all 20 have been viewed, in which case move on    
+    let current_trial = pictureCount;
+    let recorded_type = currentVis;
+     pictureCount++;
     if (pictureCount >= 20) {
         pictureCount = 0;
         currentVis += 1;
@@ -83,15 +84,15 @@ async function onClick() {
         },
         body: JSON.stringify({
             name: document.getElementById("nameInput").value,
-            visualization_type: currentVis,
-            trial_number: pictureCount,
-            actual_percent_diff: current_percent_diff?current_percent_diff: Math.abs(percent1 - percent2),
+            visualization_type: recorded_type,
+            trial_number: current_trial,
+            actual_percent_diff: current_percent_diff?current_percent_diff: percent1 < percent2 ? (percent1/percent2) * 100 : (percent2/percent1) * 100,
             reported_percent_diff: slider.value
 
         })
     });
 }
-current_percent_diff = Math.abs(percent1 - percent2);
+current_percent_diff = percent1 < percent2 ? (percent1/percent2) * 100 : (percent2/percent1) * 100;
  button.textContent = "Submit";
  slider.value = 50; //resets the slider
 document.getElementById("percentLabel").textContent = slider.value + "%";

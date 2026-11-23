@@ -21,8 +21,9 @@ export default async function drawMap(percentOne, percentTwo){
 }
 function buildMap(mapData, stateData, percentOne, percentTwo){
     const svg = d3.create("svg").attr("width", 1500).attr("height", 700).attr("viewBox", [0, 0, 1500, 700]).attr("class", "chart");
-    const random_blue_one = Math.round((percentOne * .01) * 51);
-    const random_blue_two = Math.round((percentTwo * 0.01) * 51);
+    const random_blue_one = Math.round((percentOne * .01) * 50);
+    const random_blue_two = Math.round((percentTwo * 0.01) * 50);
+    console.log(random_blue_one, random_blue_two);
     const votes_one = d3.shuffle(Array(random_blue_one).fill(1).concat(Array(50-random_blue_one).fill(0)));
     const votes_two = d3.shuffle(Array(random_blue_two).fill(1).concat(Array(50-random_blue_two).fill(0)));
     const colorMap = d3.scaleOrdinal().domain([1, 0]).range(["blue", "red"]);
