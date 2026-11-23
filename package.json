@@ -1,0 +1,27 @@
+{
+  "name": "a3-keaganhitt-alexlowczyk",
+  "version": "1.0.0",
+  "description": "Assignment 3 - Alex Lowczyk & Keagan Hitt's 2026 Midterms\r ===",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjhitt/a3-keaganhitt-alexlowczyk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kjhitt/a3-keaganhitt-alexlowczyk/issues"
+  },
+  "homepage": "https://github.com/kjhitt/a3-keaganhitt-alexlowczyk#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "csv-writer": "^1.6.0",
+    "express": "^5.3.0"
+  }
+}

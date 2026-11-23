@@ -15,14 +15,14 @@ async function loadMap(){
     const map = await fetch(`https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json`).then(data => data.json());
     return map;
 }   
-export default async function drawMap(){
+export default async function drawMap(percentOne, percentTwo){
     const [stateData, mapData] = await Promise.all([loadStateData(), loadMap()]);
-    buildMap(mapData, stateData);
+    buildMap(mapData, stateData, percentOne, percentTwo);
 }
-function buildMap(mapData, stateData){
+function buildMap(mapData, stateData, percentOne, percentTwo){
     const svg = d3.create("svg").attr("width", 1500).attr("height", 700).attr("viewBox", [0, 0, 1500, 700]).attr("class", "chart");
-    const random_blue_one = d3.randomInt(0,51)()
-    const random_blue_two = d3.randomInt(0,51)()
+    const random_blue_one = Math.round((percentOne * .01) * 51);
+    const random_blue_two = Math.round((percentTwo * 0.01) * 51);
     const votes_one = d3.shuffle(Array(random_blue_one).fill(1).concat(Array(50-random_blue_one).fill(0)));
     const votes_two = d3.shuffle(Array(random_blue_two).fill(1).concat(Array(50-random_blue_two).fill(0)));
     const colorMap = d3.scaleOrdinal().domain([1, 0]).range(["blue", "red"]);

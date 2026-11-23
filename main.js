@@ -11,24 +11,25 @@ const button = document.getElementById("button"); //button on webpage (turns int
 const slider = document.getElementById("percentInput");
 var pictureCount = 19; //number of pictures clicked through in each visualization
 var currentVis = 0; //to keep track of which visualization we're on
-
+let current_percent_diff = null;
 function drawVisualization() {
     document.querySelectorAll(".chart").forEach(chart => chart.remove()); //remove chart if it exists
     var percent1 = Math.random() * 100;
     var percent2 = Math.random() * 100;
+    console.log(percent1, percent2); //log the random percentages for debugging
 
     //draws different visualizations depending on which it's on
     if (currentVis === 1) {
         drawNeedles(percent1, percent2);
     }
     else if (currentVis === 2) {
-        drawBarbell();
+        drawBarbell(percent1, percent2);
     }
     else if (currentVis === 3) {
         drawHouses(percent1, percent2);
     }
     else if (currentVis === 4) {
-        drawMap();
+        drawMap(percent1, percent2);
     }
     else if (currentVis >= 5) {
         button.remove();
@@ -37,18 +38,16 @@ function drawVisualization() {
         document.getElementById("slider").classList.remove("visibleSlider");
         document.getElementById("question").hidden = true;
     }
+    return {percent1, percent2};
 }
 
 //function for when the button is clicked, moves on to the next step
-function onClick() {
+async function onClick() {
     //TODO: submit values to the server here
-
-    slider.value = 50; //resets the slider
-    document.getElementById("percentLabel").textContent = slider.value + "%";
-
+    document.getElementById("nameInput").hidden = true;
     //iterate pictures unless all 20 have been viewed, in which case move on
+    
     pictureCount++;
-
     if (pictureCount >= 20) {
         pictureCount = 0;
         currentVis += 1;
@@ -58,7 +57,6 @@ function onClick() {
             document.getElementById("description").textContent = "This chart is based on the NYTimes Needle, which shows the estimated chance of each party of winning. In this example, you will be measuring how far to the left the needle is on two charts - all the way to the left means 100% probability, middle = 50%, right = 0%.";
             document.getElementById("slider").classList.add("visibleSlider");
             document.getElementById("question").hidden = false;
-            button.textContent = "Submit";
         }
         if (currentVis === 2) {
             document.getElementById("header").textContent = "Visualization 2: Barbell Graph";
@@ -76,12 +74,31 @@ function onClick() {
             document.getElementById("question").textContent = "What percentage is the smaller number of states voting Democrat of the larger number of states voting Democrat?"
         }
     }
-    
-    drawVisualization();
+    const {percent1, percent2} = drawVisualization();
+    if (button.textContent === "Submit") {
+    const res = await fetch("/submit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: document.getElementById("nameInput").value,
+            visualization_type: currentVis,
+            trial_number: pictureCount,
+            actual_percent_diff: current_percent_diff?current_percent_diff: Math.abs(percent1 - percent2),
+            reported_percent_diff: slider.value
+
+        })
+    });
+}
+current_percent_diff = Math.abs(percent1 - percent2);
+ button.textContent = "Submit";
+ slider.value = 50; //resets the slider
+document.getElementById("percentLabel").textContent = slider.value + "%";
 }
 
-button.addEventListener("click", onClick);
 
+button.addEventListener("click", onClick);
 slider.addEventListener('input', () => {
     document.getElementById("percentLabel").textContent = slider.value + "%";
 });
