@@ -111,3 +111,11 @@ GitHub Details
 ```
 a3-FirstLastnameMember1-FirstLastnameMember2-FirstLastnameMember3-...
 ```
+
+
+**Note to grader**: We did not include the 5-10 randomized data points, although we did discuss our plans with Professor Harrison and he did approve our plan to only compare two charts.
+
+## Technical Achievements
+
+## Design Achievements
+- **Consistent Color, Font Choice**: Consistently used the same red/blue colors and used Arial for each font. Red: #f50000, Blue: #002df5. In the Needle, various shades of these two colors were used instead with decreasing saturation and/or lightness.

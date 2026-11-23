@@ -9,10 +9,9 @@
     <div id="container">
         <h1 id="header">Welcome to our experiment!</h1>
         <p id="description">
-            You will be shown 80 sets of images today. For each, you will enter what percentage you estimate the smaller to be of the larger. Press the button to continue.
+            You will be shown 80 sets of images today. For each, you will enter what percentage you estimate the smaller to be of the larger. Enter your name and then press the button to continue.
         </p>
-         <textarea id="nameInput" placeholder="Enter your name"></textarea>
-        
+        <textarea id="nameInput" placeholder="Enter your name"></textarea>
         <div id="scriptcontainer">
             <script type="module" src="./main.js" id="script"></script>
             <script type="module" src="./server.js"></script>
@@ -22,7 +21,8 @@
         </p>
         <div id="slider" hidden>
             <input type="range" id="percentInput" min="0" max="100" step="5"/>
-            <label for="percentInput" id="percentLabel">H</label>
+            <input type="number" id="percentText" min="0" max="100" step="5"/>
+            <label for="percentText" id="percentLabel">%</label>
         </div>
         <button type="button" id="button">Continue</button>
     </div>

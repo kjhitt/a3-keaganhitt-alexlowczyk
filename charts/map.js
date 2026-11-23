@@ -20,13 +20,16 @@ export default async function drawMap(percentOne, percentTwo){
     buildMap(mapData, stateData, percentOne, percentTwo);
 }
 function buildMap(mapData, stateData, percentOne, percentTwo){
-    const svg = d3.create("svg").attr("width", 1500).attr("height", 700).attr("viewBox", [0, 0, 1500, 700]).attr("class", "chart");
-    const random_blue_one = Math.round((percentOne * .01) * 50);
+    const width = 800;
+    const height = 300;
+
+    const svg = d3.create("svg").attr("width", width).attr("height", height).attr("viewBox", [0, 0, 1500, 450]).attr("class", "chart");
+    const random_blue_one = Math.round((percentOne * 0.01) * 50);
     const random_blue_two = Math.round((percentTwo * 0.01) * 50);
-    console.log(random_blue_one, random_blue_two);
     const votes_one = d3.shuffle(Array(random_blue_one).fill(1).concat(Array(50-random_blue_one).fill(0)));
     const votes_two = d3.shuffle(Array(random_blue_two).fill(1).concat(Array(50-random_blue_two).fill(0)));
-    const colorMap = d3.scaleOrdinal().domain([1, 0]).range(["blue", "red"]);
+    console.log('die');
+    const colorMap = d3.scaleOrdinal().domain([1, 0]).range(["#002df5", "#f50000"]);
     const actual_states = topojson.feature(mapData, mapData.objects.states).features.filter(d => d.id != "11");
     const coordinates = actual_states.map(
         d => {
@@ -36,8 +39,8 @@ function buildMap(mapData, stateData, percentOne, percentTwo){
         }
     );
     svg.append("g").selectAll("path").data(actual_states).enter().append("path").attr("d", d3.geoPath()).attr("fill", d => { return colorMap(votes_one[stateData.findIndex(s => s.name === d.properties.name)]); }).attr("stroke", "black").attr("transform", "scale(.75)");
-    svg.append("g").selectAll("text").data(coordinates).enter().append("text").text(d => d.id).attr("x", d => d.x).attr("y", d => d.y).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "black").attr("transform", "scale(.75)").attr("font-weight", "bold");
+    svg.append("g").selectAll("text").data(coordinates).enter().append("text").text(d => d.id).attr("x", d => d.x).attr("y", d => d.y).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "black").attr("transform", "scale(.75)").attr("font-weight", "bold").attr("font-family", "Arial");
     svg.append("g").selectAll("path").data(actual_states).enter().append("path").attr("d", d3.geoPath()).attr("fill", d => { return colorMap(votes_two[stateData.findIndex(s => s.name === d.properties.name)]); }).attr("stroke", "black").attr("transform", "scale(.75) translate(1000,50)");
-    svg.append("g").selectAll("text").data(coordinates).enter().append("text").text(d => d.id).attr("x", d => d.x).attr("y", d => d.y).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "black").attr("transform", "scale(.75) translate(1000,50)").attr("font-weight", "bold");
-    container.append(svg.node());
+    svg.append("g").selectAll("text").data(coordinates).enter().append("text").text(d => d.id).attr("x", d => d.x).attr("y", d => d.y).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "black").attr("transform", "scale(.75) translate(1000,50)").attr("font-weight", "bold").attr("font-family", "Arial");
+    scriptcontainer.append(svg.node());
 }
