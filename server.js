@@ -21,6 +21,10 @@ const writer = csvWriter.createObjectCsvWriter({
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
+
+app.get("/downloaddata", (req, res) => {
+    res.download(path.join(__dirname, "data.csv"));
+});
 app.post( "/submit", (req, res) => {
         const { name, visualization_type, trial_number, actual_percent_diff, reported_percent_diff } = req.body;
         writer.writeRecords([{ name, visualization_type, trial_number, actual_percent_diff, reported_percent_diff }])
