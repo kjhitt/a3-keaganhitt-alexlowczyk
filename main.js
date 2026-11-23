@@ -49,14 +49,6 @@ async function onClick() {
     let current_trial = Math.sumPrecise(pictureCount);
     let recorded_type = currentVis;
   
-    //unhide/hide different things on first click
-    if (firstClick) {
-        document.getElementById("slider").classList.add("visibleSlider");
-        document.getElementById("question").hidden = false;
-        document.getElementById("nameInput").hidden = true;
-        button.textContent = "Submit";
-        firstClick = false;
-    }
     //iterate pictures unless all 20 have been viewed, in which case move on
     if (Math.sumPrecise(pictureCount) >= 80) {
         currentVis = 5;
@@ -105,7 +97,7 @@ async function onClick() {
               name: document.getElementById("nameInput").value,
               visualization_type: recorded_type,
               trial_number: current_trial,
-              actual_percent_diff: current_percent_diff?? percent1 < percent2 ? (percent1/percent2) * 100: (percent2/percent1) * 100,
+              actual_percent_diff: current_percent_diff?? (percent1 < percent2 ? (percent1/percent2) * 100: (percent2/percent1) * 100),
               reported_percent_diff: slider.value
 
           })
@@ -114,6 +106,14 @@ async function onClick() {
     current_percent_diff = percent1 < percent2 ? (percent1/percent2) * 100 : (percent2/percent1) * 100;
     slider.value = 50; //resets the slider
     sliderText.value = 50;
+     //unhide/hide different things on first click
+    if (firstClick) {
+        document.getElementById("slider").classList.add("visibleSlider");
+        document.getElementById("question").hidden = false;
+        document.getElementById("nameInput").hidden = true;
+        button.textContent = "Submit";
+        firstClick = false;
+    }
 }
 
 //event listeners
