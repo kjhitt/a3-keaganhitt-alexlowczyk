@@ -1,7 +1,7 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 import * as topojson from "https://cdn.jsdelivr.net/npm/topojson@3/+esm";
 
-console.log(d3);
+//console.log(d3);
 async function loadStateData(){
     const stateData = await d3.csv("State_IDs_with_votes_updated.csv", (d)=>{
         return {
@@ -28,7 +28,6 @@ function buildMap(mapData, stateData, percentOne, percentTwo){
     const random_blue_two = Math.round((percentTwo * 0.01) * 50);
     const votes_one = d3.shuffle(Array(random_blue_one).fill(1).concat(Array(50-random_blue_one).fill(0)));
     const votes_two = d3.shuffle(Array(random_blue_two).fill(1).concat(Array(50-random_blue_two).fill(0)));
-    console.log('die');
     const colorMap = d3.scaleOrdinal().domain([1, 0]).range(["#002df5", "#f50000"]);
     const actual_states = topojson.feature(mapData, mapData.objects.states).features.filter(d => d.id != "11");
     const coordinates = actual_states.map(

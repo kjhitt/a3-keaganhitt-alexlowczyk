@@ -8,7 +8,7 @@ export default function drawBarbell(percentOne, percentTwo){
     const random_first_state = percentOne * 0.01;
     const random_second_state = percentTwo * 0.01;
     const total = ((7154084 * random_second_state) + (4123288 * random_first_state)) /11277372;
-    console.log(total, random_first_state, random_second_state);
+    //console.log(total, random_first_state, random_second_state);
 
 
     let line_start, line_end;
