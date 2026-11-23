@@ -14,14 +14,27 @@ h1, p, label {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 5px;
 }
 
-button {
+.chart {
+    padding: 3px;
+}
+
+#button {
     font-size: 20px;
     width: 110px;
+    margin: 5px;
 }
 
-#percentLabel {
-    min-width: 5ch;
+#percentText {
+    width: 40px;
+    margin: 1px;
+}
+
+#description {
+    height: 50px;
+}
+
+#question {
+    height: 30px;
 }

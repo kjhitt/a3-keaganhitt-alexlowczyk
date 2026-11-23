@@ -16,9 +16,9 @@ function drawNeedle(percentage) {
 
     //using min to define points so that when it's rotated it doesn't go out of bounds
     //also unless width/20 is somehow larger than height, don't need to min for x
-    var point0 = {x: width/2, y: Math.min(height/10, width/8)};
-    var point1 = {x: width/2 + width/40, y: Math.min(height/10 + 2 * height/3, width/2)};
-    var needleCenter = {x: width/2, y: Math.min(height/10 + 2 * height/3, width/2)};
+    var point0 = {x: width/2, y: Math.min(height/10, width/8) + height/6};
+    var point1 = {x: width/2 + width/40, y: Math.min(height/10 + 2 * height/3, width/2) + height/6};
+    var needleCenter = {x: width/2, y: Math.min(height/10 + 2 * height/3, width/2) + height/6};
 
     //did some cool linear algebra to figure out how to rotate the needle
     //first scaling these points to the needle center as the origin
@@ -120,6 +120,64 @@ function drawNeedle(percentage) {
         startAngle: Math.PI/2 * 0.8,
         endAngle: Math.PI/2,
     }));
+
+    //now for the labels
+    svg.append("text")
+        .text("Very Likely")
+        .attr("x", width * 1/8)
+        .attr("y", height * 25/32)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial")
+        .attr("font-size", `${height * 16/300}px`)
+        .attr("fill", "#0021b3");
+    svg.append("text")
+        .text("Likely")
+        .attr("x", width * 3/16)
+        .attr("y", height * 19/32)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial")
+        .attr("font-size", `${height * 16/300}px`)
+        .attr("fill", "#1d3395");
+    svg.append("text")
+        .text("Lean")
+        .attr("x", width * 5/16)
+        .attr("y", height * 14/32)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial")
+        .attr("font-size", `${height * 16/300}px`)
+        .attr("fill", "#3c4777");
+    svg.append("text")
+        .text("Tossup")
+        .attr("x", width/2)
+        .attr("y", height * 11/32)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial")
+        .attr("font-size", `${height * 16/300}px`)
+        .attr("fill", "#595959");
+    svg.append("text")
+        .text("Lean")
+        .attr("x", width * 11/16)
+        .attr("y", height * 14/32)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial")
+        .attr("font-size", `${height * 16/300}px`)
+        .attr("fill", "#773c3c");
+    svg.append("text")
+        .text("Likely")
+        .attr("x", width * 13/16)
+        .attr("y", height * 19/32)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial")
+        .attr("font-size", `${height * 16/300}px`)
+        .attr("fill", "#951d1d");
+    svg.append("text")
+        .text("Very Likely")
+        .attr("x", width * 7/8)
+        .attr("y", height * 25/32)
+        .attr("text-anchor", "middle")
+        .attr("font-family", "Arial")
+        .attr("font-size", `${height * 16/300}px`)
+        .attr("fill", "#b30000");
     
     //append the needle
     svg.append("path")

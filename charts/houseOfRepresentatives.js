@@ -36,13 +36,13 @@ function drawHouse(percentage) {
     function drawArc(seats, demSeatsArc, radius) {
         for (let i = 0; i < seats; i++) {
             var angle = -i/(seats - 1) * Math.PI + Math.PI
-
             svg.append('circle')
                 .attr('cx', width/2 + radius * Math.cos(angle))
-                .attr('cy', width/50 + radius * Math.sin(angle))
+                .attr('cy', height/6 + radius * Math.sin(angle))
                 .attr('r', width/100)
                 .attr('stroke', 'black')
-                .attr('fill', i < demSeatsArc ? "blue" : "red");
+                .attr('stroke-width', '0.5px')
+                .attr('fill', i < demSeatsArc ? "#002df5" : "#f50000");
         }
     }
 
@@ -51,14 +51,6 @@ function drawHouse(percentage) {
         var radius = minRadius + (maxRadius - minRadius) * i/(demSeatDistribution.length - 1);
         drawArc(seatDistribution[i], demSeatDistribution[i], radius);
     }
-
-    svg.append('rect')
-        .attr('x', 0)
-        .attr('y', 0)
-        .attr('width', width)
-        .attr('height', height)
-        .attr('stroke', 'black')
-        .attr('fill', 'none');
 
     // Append the SVG element.
     scriptcontainer.append(svg.node());
