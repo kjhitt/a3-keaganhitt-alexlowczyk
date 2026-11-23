@@ -105,13 +105,13 @@ async function onClick() {
               name: document.getElementById("nameInput").value,
               visualization_type: recorded_type,
               trial_number: current_trial,
-              actual_percent_diff: current_percent_diff?current_percent_diff: percent1 < percent2 ? Math.round(((percent1/percent2) * 100)/5) * 5 : Math.round(((percent2/percent1) * 100)/5) * 5,
+              actual_percent_diff: current_percent_diff?? percent1 < percent2 ? (percent1/percent2) * 100: (percent2/percent1) * 100,
               reported_percent_diff: slider.value
 
           })
       });
     }
-    current_percent_diff = percent1 < percent2 ? Math.round(((percent1/percent2) * 100)/5) * 5 : Math.round(((percent2/percent1) * 100)/5) * 5;
+    current_percent_diff = percent1 < percent2 ? (percent1/percent2) * 100 : (percent2/percent1) * 100;
     slider.value = 50; //resets the slider
     sliderText.value = 50;
 }
