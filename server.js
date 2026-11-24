@@ -16,7 +16,8 @@ const writer = csvWriter.createObjectCsvWriter({
         { id: "trial_number", title: "Trial Number" },
         { id: "actual_percent_diff", title: "Actual Percent Diff" },
         { id: "reported_percent_diff", title: "Reported Percent Diff" }
-    ]
+    ],
+    append: true
 });
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
