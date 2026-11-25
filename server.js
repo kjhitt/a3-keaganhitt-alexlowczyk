@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
-const dbURI = "mongodb+srv://amlowczyk_db_user:nngu2ssEHCRxJYJd@cluster0.kqp9gjg.mongodb.net/";
-mongoose.connect(dbURI)
+require("dotenv").config();
+mongoose.connect(process.env.dbURI);
 
 const app = express();
 const port = 8000;
